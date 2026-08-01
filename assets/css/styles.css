@@ -1,0 +1,1223 @@
+:root {
+    --bg1: #020617;
+    --bg2: #0f172a;
+    --bg3: #1e293b;
+    --surface: rgba(15, 23, 42, 0.88);
+    --surface-soft: rgba(255, 255, 255, 0.08);
+    --surface-soft-2: rgba(255, 255, 255, 0.12);
+    --border: rgba(255, 255, 255, 0.12);
+    --text: #f8fafc;
+    --muted: #cbd5e1;
+    --yellow: #facc15;
+    --green: #22c55e;
+    --green-dark: #16a34a;
+    --orange: #f59e0b;
+    --orange-dark: #ea580c;
+    --blue: #3b82f6;
+    --blue-dark: #2563eb;
+    --red: #ef4444;
+    --red-dark: #dc2626;
+    --purple: #8b5cf6;
+    --purple-dark: #7c3aed;
+    --gray: #64748b;
+    --gray-dark: #475569;
+    --shadow: 0 24px 56px rgba(0, 0, 0, 0.36);
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    -webkit-tap-highlight-color: transparent;
+}
+
+html {
+    color-scheme: dark;
+}
+
+body {
+    min-height: 100vh;
+    font-family: Arial, sans-serif;
+    background: radial-gradient(circle at top, rgba(59, 130, 246, 0.14), transparent 28%), linear-gradient(135deg, var(--bg1), var(--bg2), var(--bg3));
+    color: var(--text);
+    padding: 18px;
+}
+
+body.modal-open {
+    overflow: hidden;
+}
+
+button,
+input,
+select {
+    font: inherit;
+}
+
+button {
+    border: none;
+    cursor: pointer;
+}
+
+button:disabled {
+    cursor: not-allowed;
+    opacity: 0.65;
+}
+
+.app-shell {
+    width: 100%;
+    max-width: 520px;
+    margin: 0 auto;
+}
+
+.topbar,
+.status-strip,
+.card,
+.modal {
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+}
+
+.topbar {
+    display: flex;
+    justify-content: space-between;
+    gap: 16px;
+    align-items: flex-start;
+    margin-bottom: 16px;
+}
+
+.topbar-actions {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    flex-wrap: wrap;
+    justify-content: flex-end;
+}
+
+.eyebrow {
+    color: #93c5fd;
+    font-size: 12px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    margin-bottom: 6px;
+}
+
+.title {
+    color: var(--yellow);
+    font-size: 30px;
+    line-height: 1.1;
+    margin-bottom: 8px;
+}
+
+.subtitle,
+.muted,
+.footer-note,
+.small,
+.settings-item p,
+.changelog-entry p,
+.whats-new-body p,
+#modalText,
+#updateModalText {
+    color: var(--muted);
+    line-height: 1.6;
+}
+
+.icon-btn,
+.status-pill {
+    border: 1px solid var(--border);
+    background: rgba(255, 255, 255, 0.08);
+    color: var(--text);
+    border-radius: 999px;
+}
+
+.icon-btn {
+    padding: 12px 16px;
+    font-weight: 700;
+    min-width: 100px;
+}
+
+.install-btn {
+    background: linear-gradient(135deg, var(--purple), var(--purple-dark));
+    border-color: rgba(139, 92, 246, 0.5);
+}
+
+.status-strip,
+.card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 24px;
+    box-shadow: var(--shadow);
+}
+
+.status-strip {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 16px;
+    padding: 18px;
+    margin-bottom: 16px;
+}
+
+.container {
+    padding: 22px;
+}
+
+.section-head {
+    display: flex;
+    justify-content: space-between;
+    gap: 12px;
+    align-items: flex-start;
+    margin-bottom: 16px;
+}
+
+.section-head.compact {
+    margin-bottom: 12px;
+}
+
+.section-title {
+    font-size: 22px;
+}
+
+.screen {
+    display: none;
+}
+
+.screen.active {
+    display: block;
+    animation: fade-in 0.24s ease;
+}
+
+@keyframes fade-in {
+    from {
+        opacity: 0;
+        transform: translateY(8px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.info-box,
+.summary-card,
+.result,
+.changelog-card,
+.settings-item,
+.badge,
+.progress,
+.chip {
+    background: var(--surface-soft);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.info-box {
+    min-height: 150px;
+    border-radius: 20px;
+    padding: 18px;
+    margin-bottom: 14px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    white-space: pre-line;
+    line-height: 1.65;
+    font-size: 20px;
+    user-select: none;
+}
+
+.label {
+    display: block;
+    margin-bottom: 8px;
+    color: var(--muted);
+    font-size: 14px;
+}
+
+select,
+input {
+    width: 100%;
+    padding: 14px;
+    margin-bottom: 12px;
+    border-radius: 14px;
+    border: 1px solid rgba(255, 255, 255, 0.16);
+    background: rgba(255, 255, 255, 0.95);
+    color: #0f172a;
+    outline: none;
+}
+
+.btn {
+    width: 100%;
+    border-radius: 14px;
+    padding: 14px;
+    margin-bottom: 10px;
+    color: white;
+    font-weight: 700;
+    transition: transform 0.15s ease, filter 0.15s ease, opacity 0.15s ease;
+}
+
+.btn:hover {
+    filter: brightness(1.05);
+}
+
+.btn:active {
+    transform: scale(0.985);
+}
+
+.btn.primary {
+    background: linear-gradient(135deg, var(--green), var(--green-dark));
+}
+
+.btn.secondary {
+    background: linear-gradient(135deg, var(--gray), var(--gray-dark));
+}
+
+.btn.warning {
+    background: linear-gradient(135deg, var(--orange), var(--orange-dark));
+}
+
+.btn.info {
+    background: linear-gradient(135deg, var(--blue), var(--blue-dark));
+}
+
+.btn.accent {
+    background: linear-gradient(135deg, var(--purple), var(--purple-dark));
+}
+
+.btn.ghost {
+    background: transparent;
+    border: 1px solid var(--border);
+}
+
+.badge,
+.progress,
+.chip,
+.status-pill {
+    padding: 8px 12px;
+    font-size: 13px;
+    text-align: center;
+}
+
+.badge,
+.progress {
+    border-radius: 999px;
+    margin-bottom: 12px;
+}
+
+.chips {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
+    margin-bottom: 12px;
+}
+
+.chip {
+    border-radius: 999px;
+}
+
+.small {
+    margin-bottom: 12px;
+    text-align: center;
+    font-size: 13px;
+}
+
+.guess-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 10px;
+}
+
+.result,
+.summary-card,
+.changelog-card {
+    border-radius: 18px;
+    padding: 16px;
+}
+
+.result,
+.summary-card {
+    white-space: pre-line;
+    text-align: center;
+    font-weight: 700;
+    display: none;
+}
+
+.summary-card {
+    margin-top: 12px;
+    font-size: 14px;
+    line-height: 1.7;
+}
+
+.result {
+    margin-top: 12px;
+    line-height: 1.6;
+}
+
+.footer-note {
+    margin-top: 18px;
+    text-align: center;
+    font-size: 12px;
+}
+
+.settings-list {
+    display: grid;
+    gap: 12px;
+    margin-bottom: 16px;
+}
+
+.settings-item {
+    border-radius: 18px;
+    padding: 16px;
+    display: flex;
+    justify-content: space-between;
+    gap: 14px;
+    align-items: center;
+}
+
+.settings-item h3,
+.changelog-entry h4,
+.whats-new-body h4 {
+    margin-bottom: 6px;
+}
+
+.changelog-entry {
+    padding: 14px 0;
+    border-top: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.changelog-entry:first-child {
+    padding-top: 0;
+    border-top: none;
+}
+
+.changelog-entry ul,
+.whats-new-body ul {
+    padding-left: 18px;
+    color: var(--text);
+    line-height: 1.7;
+}
+
+.modal-backdrop {
+    position: fixed;
+    inset: 0;
+    display: grid;
+    place-items: center;
+    background: rgba(0, 0, 0, 0.72);
+    padding: 18px;
+    z-index: 1000;
+}
+
+.modal {
+    width: min(100%, 390px);
+    border-radius: 24px;
+    background: rgba(15, 23, 42, 0.96);
+    border: 1px solid var(--border);
+    padding: 22px;
+    box-shadow: var(--shadow);
+}
+
+.update-modal {
+    width: min(100%, 420px);
+}
+
+.modal h3 {
+    font-size: 24px;
+    margin-bottom: 10px;
+}
+
+.modal-actions {
+    display: grid;
+    gap: 10px;
+    margin-top: 16px;
+}
+
+.modal-actions.two-col {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.progress-bar {
+    width: 100%;
+    height: 12px;
+    border-radius: 999px;
+    background: rgba(255, 255, 255, 0.08);
+    overflow: hidden;
+    margin: 14px 0 10px;
+}
+
+.progress-value {
+    width: 0%;
+    height: 100%;
+    border-radius: inherit;
+    background: linear-gradient(90deg, #38bdf8, #22c55e);
+    transition: width 0.25s ease;
+}
+
+.center {
+    text-align: center;
+}
+
+.status-pill {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 86px;
+    font-weight: 700;
+}
+
+.status-pill.success {
+    background: rgba(34, 197, 94, 0.16);
+    color: #bbf7d0;
+}
+
+.status-pill.warning {
+    background: rgba(245, 158, 11, 0.16);
+    color: #fde68a;
+}
+
+.status-pill.error {
+    background: rgba(239, 68, 68, 0.16);
+    color: #fecaca;
+}
+
+.status-pill.working {
+    background: rgba(59, 130, 246, 0.16);
+    color: #bfdbfe;
+}
+
+.whats-new-body {
+    max-height: 45vh;
+    overflow: auto;
+    display: grid;
+    gap: 14px;
+}
+
+.toast {
+    position: fixed;
+    left: 50%;
+    bottom: 20px;
+    transform: translateX(-50%);
+    min-width: min(90vw, 360px);
+    border-radius: 999px;
+    padding: 12px 18px;
+    background: rgba(15, 23, 42, 0.96);
+    border: 1px solid var(--border);
+    box-shadow: var(--shadow);
+    text-align: center;
+    z-index: 1100;
+}
+
+[hidden] {
+    display: none !important;
+}
+
+@media (max-width: 520px) {
+    body {
+        padding: 12px;
+    }
+
+    .topbar,
+    .status-strip,
+    .settings-item {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .topbar-actions {
+        justify-content: stretch;
+    }
+
+    .container {
+        padding: 18px;
+    }
+
+    .chips,
+    .modal-actions.two-col,
+    .guess-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .title {
+        font-size: 26px;
+    }
+}
+
+/* ═══════════════════════════════════════════════════════════
+   PWA INSTALL SYSTEM
+   ─ Floating FAB button
+   ─ Custom install dialog
+   ─ Success overlay + animated checkmark
+   ─ Already-installed badge
+   ─ Ripple, glow, confetti
+═══════════════════════════════════════════════════════════ */
+
+/* ── Floating Install Button (FAB) ───────────────────────── */
+#pwaFloatingInstallBtn {
+    position: fixed;
+    bottom: 28px;
+    right: 20px;
+    z-index: 900;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 14px 22px 14px 16px;
+    border: none;
+    border-radius: 999px;
+    cursor: pointer;
+    outline: none;
+    overflow: hidden;
+    /* Glassmorphism */
+    background: linear-gradient(135deg,
+        rgba(139, 92, 246, 0.82) 0%,
+        rgba(99, 40, 220, 0.90) 100%);
+    backdrop-filter: blur(18px);
+    -webkit-backdrop-filter: blur(18px);
+    border: 1px solid rgba(167, 139, 250, 0.45);
+    /* Glow */
+    box-shadow:
+        0 0 0 0 rgba(139, 92, 246, 0),
+        0 8px 32px rgba(139, 92, 246, 0.55),
+        0 2px 8px rgba(0, 0, 0, 0.35);
+    color: #ffffff;
+    font-family: inherit;
+    font-size: 14px;
+    font-weight: 700;
+    letter-spacing: 0.01em;
+    /* Transitions */
+    transition:
+        transform 0.22s cubic-bezier(0.34, 1.56, 0.64, 1),
+        box-shadow 0.22s ease,
+        opacity 0.28s ease;
+}
+
+#pwaFloatingInstallBtn:hover {
+    transform: translateY(-3px) scale(1.04);
+    box-shadow:
+        0 0 0 6px rgba(139, 92, 246, 0.18),
+        0 12px 40px rgba(139, 92, 246, 0.7),
+        0 4px 12px rgba(0, 0, 0, 0.4);
+}
+
+#pwaFloatingInstallBtn:active {
+    transform: scale(0.96);
+}
+
+/* FAB icon pulses gently */
+.pwa-fab-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    animation: pwa-icon-float 2.8s ease-in-out infinite;
+}
+
+@keyframes pwa-icon-float {
+    0%, 100% { transform: translateY(0); }
+    50%       { transform: translateY(-3px); }
+}
+
+.pwa-fab-label {
+    white-space: nowrap;
+}
+
+/* Visibility states */
+.pwa-fab-hidden {
+    opacity: 0;
+    pointer-events: none;
+    transform: translateY(24px) scale(0.88);
+}
+
+.pwa-fab-visible {
+    opacity: 1;
+    pointer-events: auto;
+    transform: translateY(0) scale(1);
+    animation: pwa-fab-enter 0.45s cubic-bezier(0.34, 1.56, 0.64, 1) both;
+}
+
+.pwa-fab-exit {
+    animation: pwa-fab-leave 0.38s ease-in both;
+}
+
+@keyframes pwa-fab-enter {
+    from {
+        opacity: 0;
+        transform: translateY(32px) scale(0.82);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
+
+@keyframes pwa-fab-leave {
+    from {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+    to {
+        opacity: 0;
+        transform: translateY(20px) scale(0.88);
+    }
+}
+
+/* Ripple */
+.pwa-fab-ripple {
+    position: absolute;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.30);
+    pointer-events: none;
+    transform: scale(0);
+    opacity: 0;
+}
+
+.pwa-fab-ripple.pwa-ripple-active {
+    animation: pwa-ripple 0.55s ease-out forwards;
+}
+
+@keyframes pwa-ripple {
+    0%   { transform: scale(0); opacity: 0.5; }
+    100% { transform: scale(1); opacity: 0; }
+}
+
+/* Responsive: smaller FAB on very narrow screens */
+@media (max-width: 400px) {
+    #pwaFloatingInstallBtn {
+        padding: 12px 16px 12px 14px;
+        font-size: 13px;
+        bottom: 20px;
+        right: 14px;
+    }
+}
+
+/* ── Custom Install Dialog ───────────────────────────────── */
+.pwa-dialog-backdrop {
+    position: fixed;
+    inset: 0;
+    z-index: 1200;
+    display: grid;
+    place-items: center;
+    padding: 18px;
+    background: rgba(2, 6, 23, 0.78);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    opacity: 0;
+    transition: opacity 0.25s ease;
+}
+
+.pwa-dialog-backdrop.pwa-dialog-open {
+    opacity: 1;
+}
+
+.pwa-dialog-backdrop.pwa-dialog-closing {
+    opacity: 0;
+}
+
+.pwa-dialog {
+    width: min(100%, 400px);
+    border-radius: 28px;
+    padding: 28px 24px 24px;
+    background: linear-gradient(160deg,
+        rgba(20, 18, 50, 0.97) 0%,
+        rgba(15, 23, 42, 0.98) 100%);
+    border: 1px solid rgba(139, 92, 246, 0.35);
+    box-shadow:
+        0 0 0 1px rgba(139, 92, 246, 0.12),
+        0 32px 80px rgba(0, 0, 0, 0.6),
+        0 0 60px rgba(139, 92, 246, 0.14);
+    backdrop-filter: blur(24px);
+    -webkit-backdrop-filter: blur(24px);
+    transform: translateY(30px) scale(0.95);
+    transition: transform 0.28s cubic-bezier(0.34, 1.56, 0.64, 1),
+                opacity 0.25s ease;
+    opacity: 0;
+}
+
+.pwa-dialog-backdrop.pwa-dialog-open .pwa-dialog {
+    transform: translateY(0) scale(1);
+    opacity: 1;
+}
+
+.pwa-dialog-backdrop.pwa-dialog-closing .pwa-dialog {
+    transform: translateY(24px) scale(0.94);
+    opacity: 0;
+}
+
+/* App icon with glow ring */
+.pwa-dialog-icon-wrap {
+    position: relative;
+    width: 80px;
+    height: 80px;
+    margin: 0 auto 18px;
+}
+
+.pwa-dialog-app-icon {
+    width: 80px;
+    height: 80px;
+    border-radius: 20px;
+    position: relative;
+    z-index: 1;
+    box-shadow: 0 6px 24px rgba(139, 92, 246, 0.5);
+}
+
+.pwa-dialog-icon-glow {
+    position: absolute;
+    inset: -8px;
+    border-radius: 28px;
+    background: radial-gradient(circle, rgba(139, 92, 246, 0.35), transparent 70%);
+    animation: pwa-glow-pulse 2.4s ease-in-out infinite;
+    z-index: 0;
+}
+
+@keyframes pwa-glow-pulse {
+    0%, 100% { opacity: 0.7; transform: scale(1); }
+    50%       { opacity: 1;   transform: scale(1.12); }
+}
+
+.pwa-dialog-eyebrow {
+    text-align: center;
+    color: #a78bfa;
+    font-size: 11px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    margin-bottom: 6px;
+    font-weight: 700;
+}
+
+.pwa-dialog-title {
+    text-align: center;
+    font-size: 22px;
+    font-weight: 800;
+    color: #f8fafc;
+    margin-bottom: 10px;
+    line-height: 1.25;
+}
+
+.pwa-dialog-body {
+    text-align: center;
+    color: #cbd5e1;
+    font-size: 14px;
+    line-height: 1.6;
+    margin-bottom: 18px;
+}
+
+/* Benefits list */
+.pwa-dialog-benefits {
+    list-style: none;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 8px 12px;
+    margin-bottom: 16px;
+    padding: 0;
+}
+
+.pwa-dialog-benefits li {
+    display: flex;
+    align-items: center;
+    gap: 7px;
+    font-size: 13px;
+    color: #e2e8f0;
+    background: rgba(255, 255, 255, 0.07);
+    border: 1px solid rgba(255, 255, 255, 0.10);
+    border-radius: 999px;
+    padding: 6px 12px;
+    font-weight: 600;
+}
+
+.pwa-benefit-check {
+    font-size: 14px;
+    flex-shrink: 0;
+}
+
+/* Offline note */
+.pwa-dialog-offline-note {
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+    font-size: 12px;
+    color: #94a3b8;
+    background: rgba(59, 130, 246, 0.09);
+    border: 1px solid rgba(59, 130, 246, 0.22);
+    border-radius: 12px;
+    padding: 10px 14px;
+    margin-bottom: 20px;
+    line-height: 1.5;
+}
+
+/* Action buttons */
+.pwa-dialog-actions {
+    display: grid;
+    gap: 10px;
+}
+
+.pwa-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    width: 100%;
+    padding: 14px 20px;
+    border: none;
+    border-radius: 14px;
+    cursor: pointer;
+    font: inherit;
+    font-weight: 700;
+    font-size: 15px;
+    transition: transform 0.15s ease, filter 0.15s ease, box-shadow 0.15s ease;
+}
+
+.pwa-btn:hover { filter: brightness(1.08); }
+.pwa-btn:active { transform: scale(0.975); }
+.pwa-btn:disabled { opacity: 0.6; cursor: not-allowed; }
+
+.pwa-btn-install {
+    background: linear-gradient(135deg, #8b5cf6, #6d28d9);
+    color: #fff;
+    box-shadow: 0 4px 20px rgba(139, 92, 246, 0.45);
+}
+
+.pwa-btn-install:hover {
+    box-shadow: 0 6px 28px rgba(139, 92, 246, 0.65);
+}
+
+.pwa-btn-later {
+    background: rgba(255, 255, 255, 0.07);
+    border: 1px solid rgba(255, 255, 255, 0.14);
+    color: #94a3b8;
+}
+
+/* ── Success Overlay ─────────────────────────────────────── */
+.pwa-success-overlay {
+    position: fixed;
+    inset: 0;
+    z-index: 1500;
+    display: grid;
+    place-items: center;
+    background: rgba(2, 6, 23, 0.88);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    opacity: 0;
+    transition: opacity 0.4s ease;
+    pointer-events: none;
+}
+
+.pwa-success-overlay.pwa-success-visible {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+.pwa-success-box {
+    text-align: center;
+    animation: pwa-success-pop 0.5s cubic-bezier(0.34, 1.56, 0.64, 1) both;
+    padding: 0 24px;
+}
+
+@keyframes pwa-success-pop {
+    from { transform: scale(0.6) translateY(30px); opacity: 0; }
+    to   { transform: scale(1) translateY(0);      opacity: 1; }
+}
+
+/* SVG checkmark animation */
+.pwa-success-animation {
+    position: relative;
+    width: 100px;
+    height: 100px;
+    margin: 0 auto 22px;
+}
+
+.pwa-checkmark {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+}
+
+.pwa-checkmark-circle {
+    stroke: #22c55e;
+    stroke-width: 2;
+    stroke-dasharray: 166;
+    stroke-dashoffset: 166;
+    animation: pwa-stroke 0.6s cubic-bezier(0.65, 0, 0.45, 1) 0.1s forwards;
+}
+
+.pwa-checkmark-check {
+    transform-origin: 50% 50%;
+    stroke: #22c55e;
+    stroke-width: 3;
+    stroke-dasharray: 48;
+    stroke-dashoffset: 48;
+    animation: pwa-stroke 0.4s cubic-bezier(0.65, 0, 0.45, 1) 0.6s forwards;
+}
+
+@keyframes pwa-stroke {
+    100% { stroke-dashoffset: 0; }
+}
+
+/* Confetti burst */
+.pwa-confetti-burst {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    pointer-events: none;
+}
+
+.pwa-confetti-burst span {
+    position: absolute;
+    display: block;
+    width: 8px;
+    height: 8px;
+    border-radius: 2px;
+    opacity: 0;
+    animation: pwa-confetti-fly 0.8s ease-out 0.5s forwards;
+}
+
+.pwa-confetti-burst span:nth-child(1)  { background: #f59e0b; animation-delay: 0.55s; --tx: -50px; --ty: -55px; --rot: 35deg; }
+.pwa-confetti-burst span:nth-child(2)  { background: #3b82f6; animation-delay: 0.60s; --tx:  55px; --ty: -50px; --rot: -20deg; }
+.pwa-confetti-burst span:nth-child(3)  { background: #22c55e; animation-delay: 0.58s; --tx: -40px; --ty:  60px; --rot: 60deg; }
+.pwa-confetti-burst span:nth-child(4)  { background: #ef4444; animation-delay: 0.62s; --tx:  50px; --ty:  55px; --rot: -45deg; }
+.pwa-confetti-burst span:nth-child(5)  { background: #a78bfa; animation-delay: 0.56s; --tx:  0px;  --ty: -65px; --rot: 10deg; }
+.pwa-confetti-burst span:nth-child(6)  { background: #fb923c; animation-delay: 0.64s; --tx: -60px; --ty: -20px; --rot: -30deg; }
+.pwa-confetti-burst span:nth-child(7)  { background: #38bdf8; animation-delay: 0.57s; --tx:  62px; --ty: -15px; --rot: 50deg; }
+.pwa-confetti-burst span:nth-child(8)  { background: #f472b6; animation-delay: 0.61s; --tx:  10px; --ty:  68px; --rot: -60deg; }
+
+@keyframes pwa-confetti-fly {
+    0%   { transform: translate(0, 0) rotate(0deg) scale(0.5); opacity: 1; }
+    100% { transform: translate(var(--tx), var(--ty)) rotate(var(--rot)) scale(1); opacity: 0; }
+}
+
+.pwa-success-title {
+    font-size: 24px;
+    font-weight: 800;
+    color: #f8fafc;
+    margin-bottom: 10px;
+    line-height: 1.2;
+    animation: pwa-fade-up 0.4s ease 0.9s both;
+}
+
+.pwa-success-body {
+    font-size: 16px;
+    color: #94a3b8;
+    animation: pwa-fade-up 0.4s ease 1.05s both;
+}
+
+@keyframes pwa-fade-up {
+    from { opacity: 0; transform: translateY(10px); }
+    to   { opacity: 1; transform: translateY(0); }
+}
+
+/* ── Already-installed Badge ─────────────────────────────── */
+.pwa-installed-badge {
+    position: fixed;
+    bottom: 28px;
+    right: 20px;
+    z-index: 900;
+    display: flex;
+    align-items: center;
+    gap: 7px;
+    padding: 12px 20px;
+    border-radius: 999px;
+    background: rgba(34, 197, 94, 0.18);
+    border: 1px solid rgba(34, 197, 94, 0.40);
+    color: #bbf7d0;
+    font-size: 14px;
+    font-weight: 700;
+    font-family: inherit;
+    box-shadow: 0 6px 28px rgba(34, 197, 94, 0.25);
+    transition: opacity 0.35s ease, transform 0.35s ease;
+}
+
+.pwa-installed-badge-hidden {
+    opacity: 0;
+    transform: translateY(16px) scale(0.92);
+    pointer-events: none;
+}
+
+.pwa-installed-badge-visible {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+}
+
+/* ── Light-mode support (prefers-color-scheme: light) ───── */
+@media (prefers-color-scheme: light) {
+    #pwaFloatingInstallBtn {
+        background: linear-gradient(135deg,
+            rgba(109, 40, 217, 0.92) 0%,
+            rgba(79, 22, 170, 0.96) 100%);
+        box-shadow:
+            0 8px 32px rgba(109, 40, 217, 0.5),
+            0 2px 8px rgba(0, 0, 0, 0.20);
+    }
+
+    .pwa-dialog {
+        background: linear-gradient(160deg,
+            rgba(245, 243, 255, 0.98) 0%,
+            rgba(237, 233, 254, 0.99) 100%);
+        border-color: rgba(139, 92, 246, 0.30);
+    }
+
+    .pwa-dialog-title  { color: #1e1b4b; }
+    .pwa-dialog-body   { color: #4c1d95; }
+    .pwa-dialog-eyebrow { color: #7c3aed; }
+
+    .pwa-dialog-benefits li {
+        background: rgba(139, 92, 246, 0.08);
+        border-color: rgba(139, 92, 246, 0.18);
+        color: #3730a3;
+    }
+
+    .pwa-dialog-offline-note {
+        background: rgba(59, 130, 246, 0.07);
+        color: #1e40af;
+    }
+
+    .pwa-btn-later {
+        background: rgba(0, 0, 0, 0.05);
+        border-color: rgba(0, 0, 0, 0.12);
+        color: #64748b;
+    }
+
+    .pwa-installed-badge {
+        background: rgba(34, 197, 94, 0.14);
+        color: #15803d;
+    }
+}
+
+/* ── Reduced motion ──────────────────────────────────────── */
+@media (prefers-reduced-motion: reduce) {
+    .pwa-fab-icon,
+    .pwa-dialog-icon-glow,
+    .pwa-fab-visible,
+    .pwa-fab-exit,
+    .pwa-checkmark-circle,
+    .pwa-checkmark-check,
+    .pwa-confetti-burst span,
+    .pwa-success-box {
+        animation: none !important;
+        transition: none !important;
+    }
+
+    .pwa-fab-hidden { opacity: 0; pointer-events: none; }
+    .pwa-fab-visible { opacity: 1; pointer-events: auto; }
+    .pwa-checkmark-circle { stroke-dashoffset: 0; }
+    .pwa-checkmark-check  { stroke-dashoffset: 0; }
+}
+
+/* ── Setup Cache Bar ───────────────────────────────────── */
+.setup-cache-bar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 8px;
+    min-height: 28px;
+    margin-bottom: 12px;
+}
+
+.setup-cache-badge {
+    font-size: 12px;
+    color: #86efac;
+    font-weight: 600;
+    letter-spacing: 0.01em;
+    animation: setup-badge-in 0.25s ease both;
+}
+
+@keyframes setup-badge-in {
+    from { opacity: 0; transform: translateY(-4px); }
+    to   { opacity: 1; transform: translateY(0); }
+}
+
+.setup-cache-clear {
+    background: transparent;
+    border: 1px solid rgba(255, 255, 255, 0.14);
+    border-radius: 999px;
+    color: #94a3b8;
+    font-size: 11px;
+    font-weight: 600;
+    padding: 4px 12px;
+    cursor: pointer;
+    font-family: inherit;
+    transition: color 0.15s ease, border-color 0.15s ease, background 0.15s ease;
+    margin-left: auto;
+}
+
+.setup-cache-clear:hover {
+    color: #f87171;
+    border-color: rgba(248, 113, 113, 0.40);
+    background: rgba(248, 113, 113, 0.08);
+}
+
+.setup-cache-clear:active {
+    transform: scale(0.96);
+}
+
+/* ═══════════════════════════════════════════════════════════
+   DISCUSSION TIMER  (screen4 — guess screen)
+═══════════════════════════════════════════════════════════ */
+.guess-timer-wrap {
+    background: var(--surface-soft);
+    border: 1px solid rgba(255, 255, 255, 0.10);
+    border-radius: 18px;
+    padding: 14px 16px 12px;
+    margin-bottom: 14px;
+    transition: border-color 0.3s ease, background 0.3s ease;
+}
+
+.guess-timer-wrap.timer-urgent {
+    background: rgba(239, 68, 68, 0.10);
+    border-color: rgba(239, 68, 68, 0.40);
+    animation: timer-pulse 0.6s ease-in-out infinite alternate;
+}
+
+@keyframes timer-pulse {
+    from { box-shadow: 0 0 0 0 rgba(239, 68, 68, 0); }
+    to   { box-shadow: 0 0 0 6px rgba(239, 68, 68, 0.18); }
+}
+
+.guess-timer-wrap.timer-expired {
+    animation: timer-shake 0.4s ease;
+}
+
+@keyframes timer-shake {
+    0%, 100% { transform: translateX(0); }
+    20%       { transform: translateX(-6px); }
+    40%       { transform: translateX(6px); }
+    60%       { transform: translateX(-4px); }
+    80%       { transform: translateX(4px); }
+}
+
+.guess-timer-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.guess-timer-label {
+    font-size: 13px;
+    color: var(--muted);
+    font-weight: 600;
+    letter-spacing: 0.04em;
+}
+
+.guess-timer-display {
+    font-size: 26px;
+    font-weight: 800;
+    color: var(--text);
+    font-variant-numeric: tabular-nums;
+    letter-spacing: 0.03em;
+    line-height: 1;
+    transition: color 0.3s ease;
+}
+
+.timer-urgent .guess-timer-display {
+    color: #fca5a5;
+}
+
+.guess-timer-track {
+    width: 100%;
+    height: 8px;
+    border-radius: 999px;
+    background: rgba(255, 255, 255, 0.08);
+    overflow: hidden;
+}
+
+.guess-timer-bar {
+    height: 100%;
+    border-radius: inherit;
+    background: linear-gradient(90deg, #38bdf8, #22c55e);
+    transition: width 0.9s linear, background 0.3s ease;
+}

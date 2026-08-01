@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="ne">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <meta name="theme-color" content="#0f172a">
+    <meta name="description" content="Nepali Imposter Game with safe offline-first PWA updates.">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <title>Nepali Imposter</title>
+    <link rel="manifest" href="./manifest.webmanifest">
+    <link rel="icon" type="image/png" href="./assets/icons/favicon.png">
+    <link rel="apple-touch-icon" href="./assets/icons/apple-touch-icon.png">
+    <link rel="stylesheet" href="./assets/css/styles.css">
+</head>
+<body>
+    <div class="app-shell">
+        <header class="topbar">
+            <div>
+                <h1 class="title">Nepali Imposter</h1>
+                <p class="subtitle">Fast offline gameplay with safe automatic updates.</p>
+            </div>
+            <div class="topbar-actions">
+                <button class="icon-btn install-btn" id="installAppBtn" type="button" hidden>Install App</button>
+                <button class="icon-btn" id="openSettingsBtn" type="button" aria-label="Open settings">Settings</button>
+            </div>
+        </header>
+
+        <section class="status-strip" id="statusStrip" aria-live="polite">
+            <div>
+                <strong id="statusHeadline">Ready</strong>
+                <p id="statusText">Version <span data-app-version>v0.0.0</span> is installed and available offline.</p>
+            </div>
+            <span class="status-pill" id="onlineIndicator">Checking...</span>
+        </section>
+
+        <section class="card" id="downloadCard" hidden>
+            <div class="section-head">
+                <div>
+                    <p class="eyebrow">Background Update</p>
+                    <h2 class="section-title">Downloading latest version</h2>
+                </div>
+                <span class="status-pill working" id="downloadPercent">0%</span>
+            </div>
+            <div class="progress-bar" aria-hidden="true">
+                <div class="progress-value" id="downloadProgress"></div>
+            </div>
+            <p class="muted" id="downloadMessage">Checking for updates...</p>
+        </section>
+
+        <main class="container card">
+            <section class="screen active" id="screen1">
+                <div class="info-box">START थिचेर खेल सुरु गर्नुहोस्</div>
+                <button class="btn primary" id="startGameBtn" type="button">START GAME</button>
+                <button class="btn secondary" id="homeSettingsBtn" type="button">SETTINGS & ABOUT</button>
+                <div class="summary-card" id="lastRoundBox"></div>
+            </section>
+
+            <section class="screen" id="screen2">
+                <div class="info-box">खेल सेटअप गर्नुहोस्</div>
+                <div class="setup-cache-bar">
+                    <span class="setup-cache-badge" id="setupCacheBadge" hidden>✦ Settings restored</span>
+                    <button class="setup-cache-clear" id="clearSetupCacheBtn" type="button">🗑 Reset Saved Settings</button>
+                </div>
+
+                <label class="label" for="category">Category छान्नुहोस्</label>
+                <select id="category">
+                    <option value="random">Random Category</option>
+                    <option value="food">Food</option>
+                    <option value="animals">Animals</option>
+                    <option value="objects">Objects</option>
+                    <option value="actors">Actors</option>
+                    <option value="places">Places</option>
+                    <option value="professions">Professions</option>
+                    <option value="vehicles">Vehicles</option>
+                    <option value="colors">Colors</option>
+                    <option value="sports">Sports</option>
+                    <option value="bodyParts">Body Parts</option>
+                    <option value="nature">Nature</option>
+                    <option value="schoolItems">School Items</option>
+                    <option value="fruits">Fruits</option>
+                    <option value="countries">Countries</option>
+                    <option value="bibleCharacters">Bible Characters (बाइबल पात्रहरू)</option>
+                    <option value="biblePlaces">Bible Places (बाइबल स्थानहरू)</option>
+                    <option value="christianSongs">Christian Songs (क्रिश्चियन गीतहरू)</option>
+                </select>
+
+                <label class="label" for="playerCount">Players संख्या</label>
+                <input type="number" id="playerCount" min="3" max="20" placeholder="जस्तै: 3">
+
+                <label class="label" for="playerNames">Players name (comma separated)</label>
+                <input type="text" id="playerNames" placeholder="जस्तै: Ram, Shyam, Hari">
+
+                <label class="label" for="hintMode">Imposter लाई hint दिने?</label>
+                <select id="hintMode">
+                    <option value="yes">Yes - hint दिनुहोस्</option>
+                    <option value="no">No - hint नदिनुहोस्</option>
+                </select>
+
+                <label class="label" for="soundMode">Sound</label>
+                <select id="soundMode">
+                    <option value="on">ON</option>
+                    <option value="off">OFF</option>
+                </select>
+
+                <label class="label" for="shuffleMode">Player order</label>
+                <select id="shuffleMode">
+                    <option value="no">Normal order</option>
+                    <option value="yes">Shuffle order</option>
+                </select>
+
+                <label class="label" for="timerMode">Discussion Timer</label>
+                <select id="timerMode">
+                    <option value="no">No Timer</option>
+                    <option value="yes">Yes - Timer ON</option>
+                </select>
+
+                <div id="timerDurationRow" hidden>
+                    <label class="label" for="timerDuration">Timer Duration (seconds)</label>
+                    <input type="number" id="timerDuration" min="10" max="600" placeholder="जस्तै: 120">
+                </div>
+
+                <button class="btn primary" id="setupStartBtn" type="button">START</button>
+                <button class="btn secondary" id="backToHomeBtn" type="button">BACK</button>
+            </section>
+
+            <section class="screen" id="screen3">
+                <div class="badge" id="gameMeta">Category: - | Hint: - | Sound: -</div>
+                <div class="chips">
+                    <div class="chip" id="roundChip">Round: 1</div>
+                    <div class="chip" id="imposterChip">Imposter: 1 जना</div>
+                </div>
+                <div class="progress" id="playerProgress">Player 1 / 3</div>
+                <div class="info-box" id="infoBox">Game Start</div>
+                <div class="small">HOLD TO SEE थिचेर राख्दा मात्र शब्द देखिन्छ। छोडेपछि फेरि लुक्छ।</div>
+
+                <button class="btn warning" id="holdBtn" type="button">HOLD TO SEE</button>
+                <button class="btn info" id="nextBtn" type="button">NEXT</button>
+                <button class="btn secondary" id="restartCurrentBtn" type="button">RESTART</button>
+            </section>
+
+            <section class="screen" id="screen4">
+                <div class="info-box">अब impostor guess गर्नुहोस्</div>
+
+                <div class="guess-timer-wrap" id="guessTimerWrap" hidden>
+                    <div class="guess-timer-header">
+                        <span class="guess-timer-label">⏱ Discussion Time</span>
+                        <span class="guess-timer-display" id="guessTimerDisplay">2:00</span>
+                    </div>
+                    <div class="guess-timer-track">
+                        <div class="guess-timer-bar" id="guessTimerBar"></div>
+                    </div>
+                </div>
+
+                <div class="guess-grid" id="guessBtns"></div>
+                <div class="result" id="resultBox"></div>
+                <div class="summary-card" id="roundSummary"></div>
+                <button class="btn accent" id="playAgainBtn" type="button" hidden>PLAY AGAIN</button>
+            </section>
+
+            <section class="screen" id="screen5">
+                <div class="section-head">
+                    <div>
+                        <p class="eyebrow">Settings & About</p>
+                        <h2 class="section-title">PWA Update Center</h2>
+                    </div>
+                    <span class="status-pill success">Installed</span>
+                </div>
+
+                <div class="settings-list">
+                    <article class="settings-item">
+                        <div>
+                            <h3>Current Version</h3>
+                            <p>The running build used by the app and service worker.</p>
+                        </div>
+                        <strong data-app-version>v0.0.0</strong>
+                    </article>
+
+                    <article class="settings-item">
+                        <div>
+                            <h3>Update Status</h3>
+                            <p id="settingsUpdateStatus">Ready to check for new releases.</p>
+                        </div>
+                        <span class="status-pill" id="settingsUpdateBadge">Idle</span>
+                    </article>
+
+                    <article class="settings-item">
+                        <div>
+                            <h3>Offline Support</h3>
+                            <p id="offlineStatusText">Installing offline files...</p>
+                        </div>
+                        <span class="status-pill" id="offlineStatusBadge">Pending</span>
+                    </article>
+
+                    <article class="settings-item">
+                        <div>
+                            <h3>Install App</h3>
+                            <p id="installStatusText">Install availability is being checked.</p>
+                        </div>
+                        <span class="status-pill" id="installStatusBadge">Checking</span>
+                    </article>
+                </div>
+
+                <button class="btn accent" id="settingsInstallBtn" type="button" hidden>INSTALL APP</button>
+                <button class="btn primary" id="checkUpdatesBtn" type="button">CHECK FOR UPDATES</button>
+                <button class="btn secondary" id="showWhatsNewBtn" type="button">WHAT'S NEW</button>
+                <button class="btn ghost" id="backFromSettingsBtn" type="button">BACK</button>
+
+                <section class="changelog-card">
+                    <div class="section-head compact">
+                        <div>
+                            <p class="eyebrow">Changelog</p>
+                            <h3 class="section-title">Recent Releases</h3>
+                        </div>
+                    </div>
+                    <div id="changelogList"></div>
+                </section>
+            </section>
+
+            <p class="footer-note">Made for fun. Safe updates. Offline after first install.</p>
+        </main>
+    </div>
+
+    <div class="modal-backdrop" id="modalBackdrop" hidden>
+        <div class="modal" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+            <h3 id="modalTitle">Confirm</h3>
+            <p id="modalText">Are you sure?</p>
+            <div class="modal-actions two-col">
+                <button class="btn secondary" id="modalCancelBtn" type="button">Cancel</button>
+                <button class="btn primary" id="modalConfirmBtn" type="button">Confirm</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal-backdrop" id="updateModalBackdrop" hidden>
+        <div class="modal update-modal" role="dialog" aria-modal="true" aria-labelledby="updateModalTitle">
+            <p class="eyebrow">Automatic Update</p>
+            <h3 id="updateModalTitle">🎉 New Version Available</h3>
+            <p id="updateModalText">A newer version is ready to install.</p>
+            <div class="progress-bar" aria-hidden="true">
+                <div class="progress-value" id="updateModalProgress"></div>
+            </div>
+            <p class="muted center" id="updateModalMessage">Background download complete.</p>
+            <div class="modal-actions two-col" id="updateModalActions">
+                <button class="btn primary" id="applyUpdateBtn" type="button">UPDATE NOW</button>
+                <button class="btn secondary" id="laterUpdateBtn" type="button">LATER</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal-backdrop" id="whatsNewBackdrop" hidden>
+        <div class="modal" role="dialog" aria-modal="true" aria-labelledby="whatsNewTitle">
+            <p class="eyebrow">Release Notes</p>
+            <h3 id="whatsNewTitle">What's New</h3>
+            <div class="whats-new-body" id="whatsNewBody"></div>
+            <div class="modal-actions single-col">
+                <button class="btn primary" id="closeWhatsNewBtn" type="button">GOT IT</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="toast" id="toast" hidden></div>
+
+    <script src="./assets/js/app-meta.js"></script>
+    <script src="./assets/js/app.js"></script>
+    <script src="./assets/js/update-manager.js"></script>
+    <script src="./assets/js/install-manager.js"></script>
+</body>
+</html>
